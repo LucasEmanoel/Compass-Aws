@@ -1,0 +1,8 @@
+Filesystem                                          Size  Used Avail Use% Mounted on
+devtmpfs                                            960M     0  960M   0% /dev
+tmpfs                                               969M     0  969M   0% /dev/shm
+tmpfs                                               969M  412K  968M   1% /run
+tmpfs                                               969M     0  969M   0% /sys/fs/cgroup
+/dev/nvme0n1p1                                       16G  1.7G   15G  11% /
+tmpfs                                               194M     0  194M   0% /run/user/1000
+fs-00551b6438692354b.efs.us-east-1.amazonaws.com:/  8.0E     0  8.0E   0% /mnt/efs
