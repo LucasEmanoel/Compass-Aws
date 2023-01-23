@@ -1,0 +1,1 @@
+Data e Hora: 2023-01-23-17:50:05 - Serviço: httpd | Status: inactive (dead) | Erro: O Servidor Está OFFLINE! 

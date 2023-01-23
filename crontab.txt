@@ -1,0 +1,1 @@
+*/5 * * * * /scripts/status_apache/script.sh 
