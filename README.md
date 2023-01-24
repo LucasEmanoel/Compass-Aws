@@ -124,6 +124,14 @@ Veja um exemplo:
 
 1. caso não possua uma VPC, crie uma vpc com o comando abaixo.
 
+* Caso tenha uma VPC, Copie o id na console aws e cole aqui.
+
+```bash
+VpcId="Cole o Id da vpc"
+```
+
+* Caso não, use o comando abaixo para criar.
+
 ```bash
 VpcId=$(aws ec2 create-vpc --cidr-block 172.31.0.0/16 --query Vpc.VpcId --output text)
 ```
@@ -131,9 +139,6 @@ VpcId=$(aws ec2 create-vpc --cidr-block 172.31.0.0/16 --query Vpc.VpcId --output
 * Para associar outra VPC, copie o id dela no console aws.
 * Note que usamos $() para executar um comando e armazenar o resultado na variável VpcId, devemos fazer o filtro dessa informação usando o --query e exportando o resultado em formato de texto usando o --output text.
 
-```bash
-VpcId="Cole o Id da vpc"
-```
 
 2. Para criar as suas subnets, utilize os comandos abaixo.
 
