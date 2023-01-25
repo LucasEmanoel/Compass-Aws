@@ -50,7 +50,7 @@
     <li>
       <a href="#release-100">Release 1.0.0</a>
       <ul>
-        <li><a href="#tranforme-sua-instancia-em-um-servidor-apache">Transforme sua instância em um servidor apache</a></li>
+        <li><a href="#transforme-sua-instancia-em-um-servidor-apache">Transforme sua instância em um servidor apache</a></li>
       </ul>
     </li>
     <li><a href="#release-200">Release 2.0.0</a></li>
@@ -140,12 +140,16 @@ VpcId=$(aws ec2 create-vpc --cidr-block 172.31.0.0/16 --query Vpc.VpcId --output
 * Note que usamos $() para executar um comando e armazenar o resultado na variável VpcId, devemos fazer o filtro dessa informação usando o --query e exportando o resultado em formato de texto usando o --output text.
 
 
-2. Para criar as suas subnets, utilize os comandos abaixo.
+2. Para criar as sua subnet, utilize os comandos abaixo.
+
+* Caso tenha uma Subnet configurada, Copie o id na console aws e cole aqui.
 
 ```bash
-SubnetId01=`aws ec2 create-subnet --vpc-id $VpcId --cidr-block 172.31.1.0/24 --query Subnet.SubnetId --output text`
-SubnetId02=`aws ec2 create-subnet --vpc-id $VpcId --cidr-block 172.31.2.0/24 --query Subnet.SubnetId --output text`
-SubnetId03=`aws ec2 create-subnet --vpc-id $VpcId --cidr-block 172.31.3.0/24 --query Subnet.SubnetId --output text`
+SubnetId01="Cole o Id da subnet"
+```
+
+```bash
+SubnetId01=`aws ec2 create-subnet --vpc-id $VpcId --cidr-block 172.64.1.0/20 --query Subnet.SubnetId --output text`
 ```
 
 * Note que é preciso alterar os finais pois estamos fazendo uma divisão da rede, assim disponibilizando 256 ip's, para cada uma uma pois usamos /24.
@@ -154,8 +158,6 @@ SubnetId03=`aws ec2 create-subnet --vpc-id $VpcId --cidr-block 172.31.3.0/24 --q
 
 ```bash
 aws ec2 modify-subnet-attribute --subnet-id $SubnetId01 --map-public-ip-on-launch
-aws ec2 modify-subnet-attribute --subnet-id $SubnetId02 --map-public-ip-on-launch
-aws ec2 modify-subnet-attribute --subnet-id $SubnetId03 --map-public-ip-on-launch
 ```
 
 3. Criando Internet Gateway(IGW).
@@ -192,13 +194,17 @@ aws ec2 create-route --route-table-id $RouteTableId --destination-cidr-block 0.0
 
 ```bash
 aws ec2 associate-route-table --subnet-id $SubnetId01 --route-table-id $RouteTableId
-aws ec2 associate-route-table --subnet-id $SubnetId02 --route-table-id $RouteTableId
-aws ec2 associate-route-table --subnet-id $SubnetId03 --route-table-id $RouteTableId
 ```
 
 * Pronto, agora você pode criar uma instancia dentro dessa subnet e conectar na internet
 
 2. Criando um Security Group para ter acesso a porta TCP/22, porta padrão do SSH.
+
+* Caso tenha uma Security Group configurado, Copie o id na console aws e cole aqui.
+
+```bash
+SgId="Cole o Id do security group"
+```
 
 ```bash
 SgId=`aws ec2 create-security-group --group-name AwsCompassSG --description "Security group for SSH access" --vpc-id $VpcId --query GroupId --output text`
@@ -478,23 +484,18 @@ Para usar em seu ambiente fique ciente que deve seguir os passos adaptando para 
 
 # Roadmap
 
-<ul>
-  <li><input type="checkbox" disabled checked> Inicie uma Instancia Aws - t3.small - 16gb SSD</li>
-  <li><input type="checkbox" disabled checked> Associe um Elastic Ip</li>
-  <li><input type="checkbox" disabled checked> Subir um Servidor Apache</li>
-  <li><input type="checkbox" disabled checked > Fazer um Mount no EFS Disponibilizado Pela Compass</li>
-  <li><input type="checkbox" disabled checked> Criar um Script de Status
-    <ul>
-      <li><input type="checkbox" disabled checked> Data + Hora</li>
-      <li><input type="checkbox" disabled checked> Nome do Serviço</li>
-      <li><input type="checkbox" disabled checked> Status do Serviço</li>
-      <li><input type="checkbox" disabled checked> Mensagem Online ou Offline</li>
-      <li><input type="checkbox" disabled checked> Gerar 1 Arquivo para Cada Status</li>
-      <li><input type="checkbox" disabled checked> Execução a Cada 5 Minutos</li>
-      <li><input type="checkbox" disabled checked> Enviar os Arquivos para EFS</li>
-    </ul>
-  </li>
-</ul>
+- [x] Inicie uma Instancia Aws - t3.small - 16gb SSD
+- [x] Associe um Elastic Ip
+- [x] Subir um Servidor Apache
+- [x] Fazer um Mount no EFS Disponibilizado Pela Compass
+- [x] Criar um Script de Status
+  - [x] Data + Hora
+  - [x] Nome do Serviço
+  - [x] Status do Serviço
+  - [x] Mensagem Online ou Offline
+  - [x] Gerar 1 Arquivo para Cada Status
+  - [x] Execução a Cada 5 Minutos
+  - [x] Enviar os Arquivos para EFS
 
 <p align="right"><a href="#compass-uol">volte pra o inicio</a></p>
 
