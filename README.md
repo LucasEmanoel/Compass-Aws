@@ -14,7 +14,7 @@
 <br />
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <a href="https://github.com/LucasEmanoel/Compass-Aws.git">
     <img src="https://github.com/LucasEmanoel/assets/blob/master/uol-logo.svg" alt="Logo" height="200">
   </a>
 
